@@ -1,4 +1,4 @@
-package katie.marvel.characterSetResponse;
+package katie.marvel.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,7 +11,7 @@ import java.util.List;
 public class CharacterDataContainer {
 
     @JsonProperty("results")
-    public List<Character> results;
+    public List<MarvelCharacter> results;
 
     @JsonProperty("count")
     public long count;

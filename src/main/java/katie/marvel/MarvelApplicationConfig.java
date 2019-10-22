@@ -1,5 +1,6 @@
 package katie.marvel;
 
+import katie.marvel.data.MarvelCharacterIDs;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -9,8 +10,8 @@ public class MarvelApplicationConfig {
 
     @Bean
     @Scope("singleton")
-    MarvelCharacters getMarvelCharacters() {
-        return new MarvelCharacters();
+    MarvelCharacterIDs getMarvelCharacters() {
+        return new MarvelCharacterIDs();
     }
 
     @Bean

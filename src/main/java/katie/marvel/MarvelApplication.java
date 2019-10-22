@@ -1,5 +1,6 @@
 package katie.marvel;
 
+import katie.marvel.data.MarvelCharacterIDs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +14,7 @@ public class MarvelApplication {
 	private MarvelAPIConnector marvelAPIConnector;
 
 	@Autowired
-	private MarvelCharacters marvelCharacters;
+	private MarvelCharacterIDs marvelCharacterIDs;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MarvelApplication.class, args);
@@ -24,19 +25,6 @@ public class MarvelApplication {
 	 */
 	@PostConstruct
 	public void load() {
-//		String configPath = "src\\main\\resources\\config.json";
-//		try (FileReader reader = new FileReader(configPath)) {
-//			JSONParser jsonParser = new JSONParser();
-//			Object obj = jsonParser.parse(reader);
-//
-//			JSONObject jsonObject = (JSONObject) obj;
-//			marvelAPIConnector.setPublicKey((String) jsonObject.get("public key"));
-//			marvelAPIConnector.setPrivateKey((String) jsonObject.get("private key"));
-//		} catch (IOException | ParseException e1) {
-//			e1.printStackTrace();
-//		}
-		marvelAPIConnector.getCharacterIDsFromAPI();
-
-		marvelCharacters.setCharacterIDs(marvelAPIConnector.getCharacterIDs());
+		marvelCharacterIDs.setCharacterSet(marvelAPIConnector.getCharacterIDsFromAPI());
 	}
 }

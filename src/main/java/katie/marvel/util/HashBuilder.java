@@ -10,8 +10,13 @@ public class HashBuilder {
      * md5(ts+privateKey+publicKey)
      * @return
      */
-    public static String getHash(String ts, String privateKey, String publicKey) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("MD5");
+    public static String getHash(String ts, String privateKey, String publicKey) {
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Could not find MD5 algorithm");
+        }
         byte[] bytesOfMessage = (ts + privateKey + publicKey).getBytes(StandardCharsets.UTF_8);
         byte[] digested = md.digest(bytesOfMessage);
         return toHexString(digested);

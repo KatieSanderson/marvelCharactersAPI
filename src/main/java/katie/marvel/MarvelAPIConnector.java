@@ -32,7 +32,7 @@ public class MarvelAPIConnector {
     @Value("${user.privateKey}")
     private String privateKey;
 
-    Set<Long> getCharacterIDsFromAPI() {
+    public Set<Long> getCharacterIDsFromAPI() {
         Set<Long> marvelCharacterIDs = new HashSet<>();
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             long offset = 0;
@@ -51,7 +51,6 @@ public class MarvelAPIConnector {
                         .build();
                 HttpGet request = new HttpGet(uri);
 
-                System.out.println("executing");
                 try (CloseableHttpResponse response = client.execute(request)) {
                     HttpEntity entity = response.getEntity();
                     if (entity == null) {
@@ -79,8 +78,7 @@ public class MarvelAPIConnector {
     public MarvelCharacter getCharacterFromAPI(long id) {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             String ts = Long.toString(System.currentTimeMillis());
-            URI uri = new URIBuilder(marvelDomain + marvelCharactersPath)
-                    .addParameter("characterId", Long.toString(id))
+            URI uri = new URIBuilder(marvelDomain + marvelCharactersPath + "/" + id)
                     .addParameter("apikey", publicKey)
                     .addParameter("ts", ts)
                     .addParameter("hash", HashBuilder.getHash(ts, privateKey, publicKey))

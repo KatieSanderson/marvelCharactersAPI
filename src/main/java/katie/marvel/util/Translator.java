@@ -11,6 +11,14 @@ public class Translator {
         this.client = client;
     }
 
+    /** Translates the textToTranslate into the desiredLanguage.
+     * Queries the translation API (Jyandex) for non-empty textToTranslate and returns result.
+     * Returns empty string on empty string input.
+     *
+     * @param textToTranslate - text to be translated by translation API
+     * @param desiredLanguage - desired language
+     * @return translated text
+     */
     public String translate(String textToTranslate, String desiredLanguage) {
         // todo translate from desired language (possibly not ISO) to ISO
         if (textToTranslate.equals("")) {

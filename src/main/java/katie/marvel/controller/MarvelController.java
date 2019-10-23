@@ -28,6 +28,10 @@ public class MarvelController {
     @Autowired
     private MarvelAPIConnector marvelAPIConnector;
 
+    /**Serves an endpoint /characters that returns all the Marvel character ids
+     *
+     * @return JSON list of all character IDs
+     */
     @GetMapping("/characters")
     public String getCharacters() {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -43,6 +47,13 @@ public class MarvelController {
         return new String(data);
     }
 
+    /** Serves an endpoint /characters/{characterId} with optional query param languageCode.
+     * Queries the real-time data from the Marvel API /v1/public/characters/{characterId} to return character information
+     *
+     * @param characterId - id of desired character
+     * @param languageCode - language code - must be in ISO-639-1 format
+     * @return JSON formatted character information - id, name, description, thumbnail
+     */
     @GetMapping("/characters/{characterId}")
     public String getCharacter(@PathVariable Long characterId, @RequestParam (required = false, defaultValue = "en") String languageCode) {
         if (!marvelCharacterIDs.getCharacterSet().contains(characterId)) {

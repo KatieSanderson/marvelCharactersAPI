@@ -33,6 +33,10 @@ public class MarvelAPIConnector {
     @Value("${user.privateKey}")
     private String privateKey;
 
+    /** Queries Marvel API  and returns all character IDs
+     *
+     * @return set of character IDs
+     */
     public Set<Long> getCharacterIDsFromAPI() {
         Set<Long> marvelCharacterIDs = new HashSet<>();
         try (CloseableHttpClient client = HttpClients.createDefault()) {
@@ -80,6 +84,10 @@ public class MarvelAPIConnector {
         return marvelCharacterIDs;
     }
 
+    /** Queries Marvel API and returns MarvelCharacter containing query result
+     *
+     * @return MarvelCharacter
+     */
     public MarvelCharacter getCharacterFromAPI(long id) {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             String ts = Long.toString(System.currentTimeMillis());

@@ -38,10 +38,16 @@ public class MarvelController {
     @GetMapping("/characters/{characterId}")
     public String getCharacter(@PathVariable Long characterId, @RequestParam (required = false, defaultValue = "en") String languageCode) {
         if (!marvelCharacterIDs.getCharacterSet().contains(characterId)) {
-            return "Character with id [" + characterId + "] does not exist";
+            return "Character id [" + characterId + "] does not exist";
         }
         MarvelCharacter marvelCharacter = marvelAPIConnector.getCharacterFromAPI(characterId);
-        marvelCharacter.setDescription(translator.translate(marvelCharacter.getDescription(), languageCode));
+
+        try {
+            marvelCharacter.setDescription(translator.translate(marvelCharacter.getDescription(), languageCode));
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
+
         ObjectMapper mapper = new ObjectMapper();
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         try {

@@ -41,9 +41,7 @@ public class MarvelController {
             return "Character with id [" + characterId + "] does not exist";
         }
         MarvelCharacter marvelCharacter = marvelAPIConnector.getCharacterFromAPI(characterId);
-        if (!languageCode.equals("en")) {
-            marvelCharacter.setDescription(translator.translate(marvelCharacter.getDescription(), languageCode));
-        }
+        marvelCharacter.setDescription(translator.translate(marvelCharacter.getDescription(), languageCode));
         ObjectMapper mapper = new ObjectMapper();
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         try {

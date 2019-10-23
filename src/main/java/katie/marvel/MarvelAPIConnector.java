@@ -52,6 +52,9 @@ public class MarvelAPIConnector {
                 HttpGet request = new HttpGet(uri);
 
                 try (CloseableHttpResponse response = client.execute(request)) {
+                    if (response.getStatusLine().getStatusCode() != 200) {
+                        throw new RuntimeException("Connection error; status code [" + response.getStatusLine().getStatusCode() + "]");
+                    }
                     HttpEntity entity = response.getEntity();
                     if (entity == null) {
                         throw new RuntimeException("Response entity is null. Response: [" + response.toString() + "].");

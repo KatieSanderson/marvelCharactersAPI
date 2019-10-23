@@ -1,6 +1,7 @@
 package katie.marvel;
 
 import katie.marvel.data.MarvelCharacterIDs;
+import katie.marvel.util.Translator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -17,5 +18,11 @@ public class MarvelApplicationConfig {
     @Bean
     MarvelAPIConnector getMarvelAPIConnector() {
         return new MarvelAPIConnector();
+    }
+
+
+    @Bean
+    Translator getTranslator() {
+        return new Translator();
     }
 }

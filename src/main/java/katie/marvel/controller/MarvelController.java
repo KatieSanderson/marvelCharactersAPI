@@ -19,6 +19,9 @@ import java.util.stream.Collectors;
 public class MarvelController {
 
     @Autowired
+    private Translator translator;
+
+    @Autowired
     private MarvelCharacterIDs marvelCharacterIDs;
 
     @Autowired
@@ -39,8 +42,7 @@ public class MarvelController {
         }
         MarvelCharacter marvelCharacter = marvelAPIConnector.getCharacterFromAPI(characterId);
         if (!languageCode.equals("en")) {
-            marvelCharacter.setDescription("hi");
-            marvelCharacter.setDescription(Translator.translate(marvelCharacter.getDescription(), languageCode));
+            marvelCharacter.setDescription(translator.translate(marvelCharacter.getDescription(), languageCode));
         }
         ObjectMapper mapper = new ObjectMapper();
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();

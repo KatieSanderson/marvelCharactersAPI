@@ -1,0 +1,10 @@
+user:
+  publicKey: eb07a5413f76be7b82b58bb1e3aa1345
+  privateKey: f179c4d3246150ea46864e8164fd5b58b836f50e
+
+marvel:
+  domain:  https://gateway.marvel.com:443
+  charactersPath: /v1/public/characters
+
+translate.key: trnsl.1.1.20191023T010428Z.e733a01f01fe958f.676bc3f70d07cec4c4f743b4e3861ce5fc54482b
+

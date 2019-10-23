@@ -13,6 +13,11 @@ public class Translator {
 
     public String translate(String textToTranslate, String desiredLanguage) {
         Jyandex client = new Jyandex(apiKey);
+        if (textToTranslate.equals("")) {
+            return "";
+        } else if (!client.supportedLanguages().getSupportedLanguages().containsKey(desiredLanguage)) {
+            throw new IllegalArgumentException("Language provided not supported.");
+        }
         return client.translateText(textToTranslate, Language.ENGLISH, desiredLanguage).getTranslatedText()[0];
     }
 }

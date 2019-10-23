@@ -12,11 +12,12 @@ public class Translator {
     private String apiKey;
 
     public String translate(String textToTranslate, String desiredLanguage) {
+        // todo translate from desired language (possibly not ISO) to ISO
         Jyandex client = new Jyandex(apiKey);
         if (textToTranslate.equals("")) {
             return "";
         } else if (!client.supportedLanguages().getSupportedLanguages().containsKey(desiredLanguage)) {
-            throw new IllegalArgumentException("Language provided not supported.");
+            throw new IllegalArgumentException("Language provided [" + desiredLanguage +"] not supported.");
         }
         return client.translateText(textToTranslate, Language.ENGLISH, desiredLanguage).getTranslatedText()[0];
     }

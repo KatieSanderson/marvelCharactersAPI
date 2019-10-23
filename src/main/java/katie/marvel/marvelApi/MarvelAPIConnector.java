@@ -42,10 +42,8 @@ public class MarvelAPIConnector {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             long offset = 0;
             // initialized larger than offset to ensure first ping (and avoid do while loop)
-            long total = 200;
+            long total = 1;
             while (offset < total) {
-                System.out.println("getting with offset " + offset + " total " + total);
-
                 String ts = Long.toString(System.currentTimeMillis());
                 URI uri = new URIBuilder(marvelDomain + marvelCharactersPath)
                         .addParameter("limit", "100")
@@ -70,7 +68,7 @@ public class MarvelAPIConnector {
                     ObjectMapper mapper = new ObjectMapper();
                     CharacterDataWrapper characterDataWrapper = mapper.readValue(result, CharacterDataWrapper.class);
 
-//                total = json.getCharacterDataContainer().getTotal();
+                    total = characterDataWrapper.getData().getTotal();
                     offset += characterDataWrapper.getData().getCount();
                     characterDataWrapper.getData().getResults()
                             .forEach(i -> marvelCharacterIDs.add(i.getId()));

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import katie.marvel.MarvelAPIConnector;
 import katie.marvel.data.MarvelCharacter;
 import katie.marvel.data.MarvelCharacterIDs;
+import katie.marvel.util.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +38,10 @@ public class MarvelController {
             return "Character with id [" + characterId + "] does not exist";
         }
         MarvelCharacter marvelCharacter = marvelAPIConnector.getCharacterFromAPI(characterId);
+        if (!languageCode.equals("en")) {
+            marvelCharacter.setDescription("hi");
+            marvelCharacter.setDescription(Translator.translate(marvelCharacter.getDescription(), languageCode));
+        }
         ObjectMapper mapper = new ObjectMapper();
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         try {

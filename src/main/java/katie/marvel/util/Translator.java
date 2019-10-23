@@ -2,18 +2,17 @@ package katie.marvel.util;
 
 import co.aurasphere.jyandex.Jyandex;
 import co.aurasphere.jyandex.dto.Language;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 
-@PropertySource("file:application.properties")
 public class Translator {
 
-    @Value("${translate.key}")
-    private String apiKey;
+    private final Jyandex client;
+
+    public Translator(Jyandex client) {
+        this.client = client;
+    }
 
     public String translate(String textToTranslate, String desiredLanguage) {
         // todo translate from desired language (possibly not ISO) to ISO
-        Jyandex client = new Jyandex(apiKey);
         if (textToTranslate.equals("")) {
             return "";
         } else if (!client.supportedLanguages().getSupportedLanguages().containsKey(desiredLanguage)) {

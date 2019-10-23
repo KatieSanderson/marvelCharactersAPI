@@ -3,7 +3,7 @@ package katie.marvel.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import katie.marvel.MarvelAPIConnector;
+import katie.marvel.marvelApi.MarvelAPIConnector;
 import katie.marvel.data.MarvelCharacter;
 import katie.marvel.data.MarvelCharacterIDs;
 import katie.marvel.util.Translator;

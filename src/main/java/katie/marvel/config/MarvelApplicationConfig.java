@@ -1,6 +1,7 @@
-package katie.marvel;
+package katie.marvel.config;
 
 import katie.marvel.data.MarvelCharacterIDs;
+import katie.marvel.marvelApi.MarvelAPIConnector;
 import katie.marvel.util.Translator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;

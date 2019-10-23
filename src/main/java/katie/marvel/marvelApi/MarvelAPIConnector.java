@@ -1,4 +1,4 @@
-package katie.marvel;
+package katie.marvel.marvelApi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import katie.marvel.data.CharacterDataWrapper;

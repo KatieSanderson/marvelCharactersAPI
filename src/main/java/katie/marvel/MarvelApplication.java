@@ -1,6 +1,7 @@
 package katie.marvel;
 
 import katie.marvel.data.MarvelCharacterIDs;
+import katie.marvel.marvelApi.MarvelAPIConnector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

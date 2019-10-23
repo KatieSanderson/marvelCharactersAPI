@@ -24,16 +24,10 @@ class MarvelControllerTest {
 
     @Test
     void getCharacters__returnsIDs() throws Exception {
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/characters"))
+        mvc.perform(MockMvcRequestBuilders.get("/characters"))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
                 .andReturn();
-
-        String content = result.getResponse().getContentAsString();
-        String regex = "\\[ (\\d+, )*\\d* ]";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(content);
-
-        assertTrue(matcher.matches());
     }
 
     @Test

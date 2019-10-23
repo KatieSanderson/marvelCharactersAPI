@@ -11,12 +11,16 @@ marvelCharactersAPI utilizes the Marvel Comics API to:
 The API includes Swagger specification that can be viewed with Swagger UI or imported to Postman
 
 DEPLOY INSTRUCTIONS
+
 Directions compiling and running this project from project root:
-1. Command: mvn package
+1. Install and configure Java and Maven if not already present on system
+    * Java: https://www.oracle.com/technetwork/java/javase/downloads/index.html
+    * Maven: https://maven.apache.org/install.html
+2. Command: mvn package
     * All required dependencies are managed by Maven
-2. Command: java -jar target/marvel-1.0.jar
-3. Navigate to http://localhost:8080/
-4. Utilize and enjoy the supported endpoints for Marvel characters API!
+3. Command: java -jar target/marvel-1.0.jar
+4. Navigate to http://localhost:8080/
+5. Utilize and enjoy the supported endpoints for Marvel characters API!
 
 Third party API
 1. Jyandex - translation API

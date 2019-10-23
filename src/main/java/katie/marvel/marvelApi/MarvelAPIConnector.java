@@ -3,7 +3,6 @@ package katie.marvel.marvelApi;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import katie.marvel.data.CharacterDataWrapper;
 import katie.marvel.data.MarvelCharacter;
-import katie.marvel.util.HashBuilder;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -85,7 +84,7 @@ public class MarvelAPIConnector {
             URI uri = new URIBuilder(marvelDomain + marvelCharactersPath + "/" + id)
                     .addParameter("apikey", publicKey)
                     .addParameter("ts", ts)
-                    .addParameter("hash", HashBuilder.getHash(ts, privateKey, publicKey))
+                    .addParameter("hash", DigestUtils.md5Hex(ts + privateKey + publicKey))
                     .build();
             HttpGet request = new HttpGet(uri);
 

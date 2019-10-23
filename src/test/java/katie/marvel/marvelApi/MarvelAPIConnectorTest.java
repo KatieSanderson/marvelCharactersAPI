@@ -1,24 +1,30 @@
 package katie.marvel.marvelApi;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 //@RunWith(SpringRunner.class)
-public class MarvelAPIConnectorTest {
+//@RunWith(value = .class)
+class MarvelAPIConnectorTest {
 
-    @Test
-    public void getCharacterIDsFromAPI() {
+    MarvelAPIConnector marvelAPIConnector;
+
+    @BeforeEach
+    void init() {
+        marvelAPIConnector = new MarvelAPIConnector();
     }
 
     @Test
-    public void getCharacterFromAPI() {
+    void getCharacterFromAPI() {
     }
 
     @Test
-    public void givenPassword_whenHashingUsingCommons_thenVerifying()  {
+    void givenPassword_whenHashingUsingCommons_thenVerifying()  {
         String hash = "afad70b4d08cffe0c2096fd503d42bc2";
         String ts = new Date(0).toString();
         String privateKey = "privateKey";
@@ -26,6 +32,6 @@ public class MarvelAPIConnectorTest {
 
         String md5Hex = DigestUtils.md5Hex(ts + privateKey + publicKey);
 
-        Assert.assertEquals(hash, md5Hex);
+        assertEquals(hash, md5Hex);
     }
 }

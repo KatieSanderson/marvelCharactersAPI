@@ -5,6 +5,7 @@ import katie.marvel.data.CharacterDataWrapper;
 import katie.marvel.data.MarvelCharacter;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.HttpEntity;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
@@ -20,7 +21,7 @@ import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
 
-@PropertySource("file:application.properties")
+@PropertySource("file:application.yml")
 public class MarvelAPIConnector {
 
     @Value("${marvel.domain}")
@@ -60,7 +61,6 @@ public class MarvelAPIConnector {
                         throw new RuntimeException("Response entity is null. Response: [" + response.toString() + "].");
                     }
                     String result = EntityUtils.toString(entity);
-                    System.out.println(result);
 
                     // response entity expected to be JSON formatted to /data objects
                     ObjectMapper mapper = new ObjectMapper();
@@ -70,6 +70,8 @@ public class MarvelAPIConnector {
                     offset += characterDataWrapper.getData().getCount();
                     characterDataWrapper.getData().getResults()
                             .forEach(i -> marvelCharacterIDs.add(i.getId()));
+                } catch (ClientProtocolException e) {
+                    throw new RuntimeException(e.getMessage());
                 }
             }
         } catch (Exception e) {
@@ -94,7 +96,6 @@ public class MarvelAPIConnector {
                     throw new RuntimeException("Response entity is null. Response: [" + response.toString() + "].");
                 }
                 String result = EntityUtils.toString(entity);
-                System.out.println(result);
 
                 // response entity expected to be JSON formatted to /data objects
                 ObjectMapper mapper = new ObjectMapper();

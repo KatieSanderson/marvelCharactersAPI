@@ -50,6 +50,16 @@
             <artifactId>lombok</artifactId>
             <version>1.18.10</version>
         </dependency>
+		<dependency>
+			<groupId>co.aurasphere</groupId>
+			<artifactId>jyandex</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+			<version>2.28</version>
+		</dependency>
     </dependencies>
 
 	<build>

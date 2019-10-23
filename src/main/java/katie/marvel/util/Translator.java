@@ -20,7 +20,6 @@ public class Translator {
      * @return translated text
      */
     public String translate(String textToTranslate, String desiredLanguage) {
-        // todo translate from desired language (possibly not ISO) to ISO
         if (textToTranslate.equals("")) {
             return "";
         } else if (!client.supportedLanguages().getSupportedLanguages().containsKey(desiredLanguage)) {

@@ -3,6 +3,7 @@ package katie.marvel.config;
 import co.aurasphere.jyandex.Jyandex;
 import katie.marvel.data.MarvelCharacterIDs;
 import katie.marvel.marvelApi.MarvelAPIConnector;
+import katie.marvel.service.MarvelService;
 import katie.marvel.util.Translator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,10 @@ public class MarvelApplicationConfig {
         return new MarvelAPIConnector();
     }
 
+    @Bean
+    MarvelService getMarvelService() {
+        return new MarvelService();
+    }
 
     @Bean
     Translator getTranslator(Jyandex jyandex) {

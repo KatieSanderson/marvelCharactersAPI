@@ -33,6 +33,7 @@ public class MarvelController {
      * @return JSON list of all character IDs
      */
     @GetMapping("/characters")
+    // TODO - convert String return val to object (MarvelCharacters) with RestExceptionHandler
     public String getCharacters() {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         final ObjectMapper mapper = new ObjectMapper();
@@ -55,6 +56,7 @@ public class MarvelController {
      * @return JSON formatted character information - id, name, description, thumbnail
      */
     @GetMapping("/characters/{characterId}")
+    // TODO - convert String return val to object (MarvelCharacter) with RestExceptionHandler
     public String getCharacter(@PathVariable Long characterId, @RequestParam (required = false, defaultValue = "en") String languageCode) {
         if (!marvelCharacterIDs.getCharacterSet().contains(characterId)) {
             return "Character id [" + characterId + "] does not exist";

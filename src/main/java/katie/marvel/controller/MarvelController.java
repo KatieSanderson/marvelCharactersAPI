@@ -1,11 +1,11 @@
 package katie.marvel.controller;
 
+import katie.marvel.data.MarvelCharacter;
 import katie.marvel.service.MarvelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
 public class MarvelController {
@@ -18,8 +18,8 @@ public class MarvelController {
      * @return JSON list of all character IDs
      */
     @GetMapping("/characters")
-    // TODO - convert String return val to object (MarvelCharacters) with RestExceptionHandler
-    public String getCharacters() {
+    @ResponseBody
+    public Set<Long> getCharacters() {
         return marvelService.getMarvelCharacters();
     }
 
@@ -30,9 +30,10 @@ public class MarvelController {
      * @param languageCode - language code - must be in ISO-639-1 format
      * @return JSON formatted character information - id, name, description, thumbnail
      */
-    @GetMapping("/characters/{characterId}")
-    // TODO - convert String return val to object (MarvelCharacter) with RestExceptionHandler
-    public String getCharacter(@PathVariable Long characterId, @RequestParam (required = false, defaultValue = "en") String languageCode) {
+    @GetMapping(value = "/characters/{characterId}")
+    @ResponseBody
+    public MarvelCharacter getCharacter(
+            @PathVariable Long characterId, @RequestParam (required = false, defaultValue = "en") String languageCode) {
         return marvelService.getMarvelCharacter(characterId, languageCode);
     }
 }

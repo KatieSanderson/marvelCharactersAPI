@@ -5,13 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -31,18 +26,11 @@ class MarvelControllerTest {
     }
 
     @Test
-    void getCharacter_nonexistentID_returnsError() throws Exception {
+    void getCharacter_nonexistentID_throwsException() throws Exception {
         int characterId = 0;
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/characters/" + characterId))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        String content = result.getResponse().getContentAsString();
-        String regex = "Character id \\[" + characterId + "] does not exist";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(content);
-
-        assertTrue(matcher.matches());
+        mvc.perform(MockMvcRequestBuilders.get("/characters/" + characterId))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.message").value("Character id [" + characterId + "]"));
     }
 
     @Test

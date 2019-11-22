@@ -4,6 +4,7 @@ import co.aurasphere.jyandex.Jyandex;
 import co.aurasphere.jyandex.dto.Language;
 import co.aurasphere.jyandex.dto.SupportedLanguageResponse;
 import co.aurasphere.jyandex.dto.TranslateTextResponse;
+import katie.marvel.exception.LanguageNotSupportedException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -54,6 +55,6 @@ class TranslatorTest {
 
     @Test
     void translate_unsupportedLanguage_throwsException() {
-        assertThrows(IllegalArgumentException.class, () -> translator.translate("hi", UNSUPPORTED_LANGUAGE));
+        assertThrows(LanguageNotSupportedException.class, () -> translator.translate("hi", UNSUPPORTED_LANGUAGE));
     }
 }

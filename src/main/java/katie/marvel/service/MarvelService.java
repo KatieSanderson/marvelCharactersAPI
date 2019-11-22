@@ -2,6 +2,7 @@ package katie.marvel.service;
 
 import katie.marvel.data.MarvelCharacter;
 import katie.marvel.data.MarvelCharacterIDs;
+import katie.marvel.exception.CharacterNotFoundException;
 import katie.marvel.marvelApi.MarvelAPIConnector;
 import katie.marvel.util.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +28,11 @@ public class MarvelService {
 
     public MarvelCharacter getMarvelCharacter(long characterId, String languageCode) {
         if (!marvelCharacterIDs.getCharacterSet().contains(characterId)) {
-            // TODO - convert String return val to object with RestExceptionHandler
-//            return "Character id [" + characterId + "] does not exist";
+            throw new CharacterNotFoundException("Character id [" + characterId + "]");
         }
         MarvelCharacter marvelCharacter = marvelAPIConnector.getCharacterFromAPI(characterId);
 
-        try {
-            marvelCharacter.setDescription(translator.translate(marvelCharacter.getDescription(), languageCode));
-        } catch (IllegalArgumentException e) {
-//            return e.getMessage();
-        }
+        marvelCharacter.setDescription(translator.translate(marvelCharacter.getDescription(), languageCode));
         return marvelCharacter;
     }
 }
